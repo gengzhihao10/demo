@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: eureka-server
+
+server:
+  port: 20000
+
+eureka:
+  instance:
+    #如果是MAC系统，要把localhost绑定到127.0.0.1上
+    hostname: localhost
+  client:
+    #作为服务端，应该关闭掉向服务端发起注册
+    register-with-eureka: false
+    #关闭掉拉去注册列表（作为服务端，本身就保有一个注册列表）
+    fetch-registry: false
+  server:
+    #强制关闭注册中心的服务自保
+    enable-self-preservation: false
+    #每隔10s触发一次服务剔除
+    eviction-interval-timer-in-ms: 10000

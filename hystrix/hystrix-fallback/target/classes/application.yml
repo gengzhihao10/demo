@@ -1,0 +1,107 @@
+spring:
+  application:
+    name: hystrix-consumer
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 50000
+
+eureka:
+  client:
+    serviceUrl:
+      #注册中心地址
+      defaultZone: http://localhost:20000/eureka/
+
+feign:
+  hystrix:
+    #开启feign下面的Hystrix功能
+    enabled: true
+
+# 超时优先级顺序如下：feign > hystrix(全局) > hystrix(接口)
+hystrix:
+  command:
+    default:
+      requestCache:
+        enabled: true
+      fallback:
+        #是否开启服务降级
+        enabled: true
+      execution:
+        timeout:
+          #超时
+          enabled: true
+        isolation:
+          thread:
+            #超时时间
+            timeoutInMilliseconds: 1000
+            #超时以后终止线程
+            interruptOnTimeout: true
+            #取消的时候终止线程
+            interruptOnFutureCancel: true
+      circuitBreaker:
+        #--------------打酱油的参数---------------------
+        #-------------默认就有的参数(值为现在标注出的值)-----------------
+        #开启熔断功能(熔断功能和熔断开关不一样，熔断开关开启后是直接返回静默结果，熔断功能仅仅是开启hystrix的熔断功能)
+        enabled: true
+        #强制开启熔断开关
+        forceOpen: false
+        #强制关闭熔断开关
+        forceClosed: false
+        #----------正八经的参数----------
+        #----------默认不开启的参数----------
+        #熔断的前提条件(请求的数量)，在一定的时间窗口内，请求达到5个以后，才开始进行熔断的判断
+        #与metrics.roolingStats.timeInMilliseconds参数配合使用
+        requestVolumeThreshold: 5
+        #失败几率达到50%，熔断开启
+        errorThresholdPercentage: 50
+        #当熔断开启以后，经过多少秒再进入半开状态
+        sleepWindowInMilliseconds: 15000
+      metrics:
+        rollingStats:
+          #每20秒进行一次请求数量的统计
+          timeInMilliseconds: 20000
+#    cacheKey:
+#      fallback:
+#        #是否开启服务降级
+#        enabled: true
+#      execution:
+#        timeout:
+#          #超时
+#          enabled: true
+#        isolation:
+#          thread:
+#            #超时时间
+#            timeoutInMilliseconds: 3000
+#            #超时以后终止线程
+#            interruptOnTimeout: true
+#            #取消的时候终止线程
+#            interruptOnFutureCancel: true
+
+
+feign-client:
+  ribbon:
+    #每台机器最大的重试次数
+    MaxAutoRetries: 0
+    #可以再重试几台机器
+    MaxAutoRetriesNextServer: 1
+    #连接超时时间(ms)
+    ConnectTimeout: 1500
+    #业务处理超时(ms)
+    ReadTimeout: 4000
+    #在所有类型的HTTP Method进行重试
+    #默认为false，仅在不改动数据(查)的情况下进行重试
+    #为true时，要特别注意幂等问题
+    OkToRetryOnAllOperations: false
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        #把所有的endpoint全部暴露出去
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

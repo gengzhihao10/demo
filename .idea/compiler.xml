@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <option name="BUILD_PROCESS_HEAP_SIZE" value="1200" />
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eureka-server" />
+        <module name="config-server" />
+        <module name="config-client" />
+        <module name="eureka-server-peer2" />
+        <module name="ribbon-consumer" />
+        <module name="eureka-client" />
+        <module name="feign-consumer-advanced" />
+        <module name="feign-client" />
+        <module name="feign-consumer" />
+        <module name="config-server-eureka" />
+        <module name="hystrix-fallback" />
+        <module name="hystrix-dashboard" />
+        <module name="feign-client-intf" />
+        <module name="hystrix-turbine" />
+        <module name="eureka-consumer" />
+        <module name="eureka-server-peer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
+  </component>
+</project>

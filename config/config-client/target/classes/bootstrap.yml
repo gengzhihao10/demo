@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: config-consumer
+  cloud:
+    config:
+      #config会默认将spring.application.name作为name，很可能导致name与github中需要的application name不一致，进而拉去失败
+      #这里需要重新指定通过config拉取配置文件时的application name，使其与github中的config-consumer一致
+      name: config-consumer
+#      uri: http://localhost:60000
+      discovery:
+        #使服务发现生效
+        enabled: true
+        service-id: config-server-eureka
+      #这里的不同环境的配置文件在工作中一般不是写死的，是通过外部注入进来的，如在Tomcat中指定是哪个环境的配置文件
+      profile: dev
+      label: master
+server:
+  port: 61000
+
+myWords: ${words}
+
+eureka:
+  client:
+    serviceUrl:
+      #注册中心地址
+      defaultZone: http://localhost:20000/eureka/
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

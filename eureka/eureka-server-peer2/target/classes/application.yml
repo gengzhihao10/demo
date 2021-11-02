@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: eureka-server-peer2
+
+server:
+  port: 20000
+
+eureka:
+  instance:
+    #对应在host文件中的改动
+    hostname: peer2
+  client:
+    service-url:
+      #注册中心注册
+      defaultZone: http://peer1:20001/eureka

@@ -1,0 +1,28 @@
+server:
+  port: 52000
+
+management:
+  port: 52001
+
+spring:
+  application:
+    name: hystrix-turbine
+
+eureka:
+  client:
+    serviceUrl:
+      #注册中心地址
+      defaultZone: http://localhost:20000/eureka/
+
+turbine:
+  #指定了所需要监控的服务名(application.yml中的服务名称，不是maven的项目名字)
+  app-config: hystrix-consumer
+  #有多个集群的情况下，每个turbine监控一个集群
+  cluster-name-expression: "'default'"
+  #默认情况下，turbine是以host区分聚合服务的。
+  #如果是在本地聚合服务，则还要通过port区分服务并收集数据
+  combine-host-port: true
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
+  aggregator:
+    clusterConfig: default

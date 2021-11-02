@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ribbon-consumer
+
+server:
+  port: 31000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka/
+
+#不同于RibbonConfiguration进行的全局负载均衡策略
+#这里的是针对某一个服务进行负载均衡配置。
+#eureka-client为指定的服务名称
+#eureka-client:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

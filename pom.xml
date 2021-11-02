@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>spring-cloud-demo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>eureka/eureka-server</module>
+        <module>eureka/eureka-client</module>
+        <module>eureka/eureka-consumer</module>
+        <module>eureka-server-peer</module>
+        <module>eureka-server-peer2</module>
+        <module>ribbon-consumer</module>
+        <module>ribbon/ribbon-consumer</module>
+        <module>feign/feign-consumer</module>
+        <module>feign/feign-client-intf</module>
+        <module>feign/feign-client</module>
+        <module>feign/feign-consumer-advanced</module>
+        <module>hystrix/hystrix-fallback</module>
+        <module>hystrix/hystrix-turbine</module>
+        <module>hystrix/hystrix-dashboard</module>
+        <module>config/config-server</module>
+        <module>config/config-client</module>
+        <module>config-server-eureka</module>
+        <module>config/config-server-eureka</module>
+    </modules>
+
+    <!--dependencyManagement中的依赖，子项目中不显式声明，是无法继承的。只有显示声明依赖并且没有指定版本号的情况下，才会继承父项目中dependencyManagement的依赖-->
+    <dependencyManagement>
+        <dependencies>
+            <!--spring cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.SR4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--spring boot parent -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.1.4.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--dependencies中的依赖，子项目无需显示声明即可全部继承-->
+    <dependencies>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <!--这里爆红，不知道为什么，暂时搁置-->
+<!--                <configuration>-->
+<!--                    <source></source>-->
+<!--                    <target></target>-->
+<!--                </configuration>-->
+            </plugin>
+        </plugins>
+    </build>
+</project>

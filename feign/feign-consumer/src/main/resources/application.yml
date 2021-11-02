@@ -1,0 +1,27 @@
+server:
+  port: 40001
+
+spring:
+  application:
+    name: feign-client
+
+eureka:
+  client:
+    serviceUrl:
+      #注册中心地址
+      defaultZone: http://localhost:20000/eureka/
+
+feign-client:
+  ribbon:
+    #每台机器最大的重试次数
+    MaxAutoRetries: 2
+    #可以再重试几台机器
+    MaxAutoRetriesNextServer: 2
+    #连接超时时间(ms)
+    ConnectTimeout: 1000
+    #业务处理超时(ms)
+    ReadTimeout: 2000
+    #在所有类型的HTTP Method进行重试
+    #默认为false，仅在不改动数据(查)的情况下进行重试
+    #为true时，要特别注意幂等问题
+    OkToRetryOnAllOperations: true
