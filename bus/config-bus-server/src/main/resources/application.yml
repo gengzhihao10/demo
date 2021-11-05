@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: config-bus-server
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/gengzhihao10/config-repo.git
+          #强制拉去资源文件
+          force-pull: true
+          #默认分支
+          default-label: main
+          username: gengzhihao10
+          password: 19950316nba
+
+
+
+  #仓库下的目录。可以配置多个目录路径，支持通配符*
+#      label: main
+  #          search-paths:
+  #拉去配置文件的URL
+  #    http://localhost:60000/ {label} / {application} - {profile} . {yml/properties/json}
+  #    http://localhost:60000/ {application} - {profile} . {yml/properties/json}
+
+
+server:
+  port: 60002
+
+eureka:
+  client:
+    serviceUrl:
+      #注册中心地址
+      defaultZone: http://localhost:20000/eureka/
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
