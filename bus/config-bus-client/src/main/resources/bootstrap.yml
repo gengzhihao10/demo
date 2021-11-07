@@ -7,9 +7,9 @@ spring:
     username: guest
     password: guest
   cloud:
-#    stream:
-#      #同时引入了rabbit和kafka，需要在配置文件中指定默认的binder，否则会在启动时报错，有两个可用的binder，找不到默认使用的binder
-#      default-binder: rabbit
+    stream:
+      #同时引入了rabbit和kafka，需要在配置文件中指定默认的binder，否则会在启动时报错，有两个可用的binder，找不到默认使用的binder
+      default-binder: rabbit
     config:
       #config会默认将spring.application.name作为name，很可能导致name与github中需要的application name不一致，进而拉去失败
       #这里需要重新指定通过config拉取配置文件时的application name，使其与github中的config-consumer一致
@@ -23,7 +23,7 @@ spring:
       profile: dev
       label: main
 server:
-  port: 61002
+  port: 61003
 
 myWords: ${words}
 

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: config-bus-client
+    name: config-bus-consumer
   rabbitmq:
     host: localhost
     port: 5672
@@ -23,7 +23,7 @@ spring:
       profile: dev
       label: main
 server:
-  port: 61002
+  port: 61003
 
 myWords: ${words}
 
