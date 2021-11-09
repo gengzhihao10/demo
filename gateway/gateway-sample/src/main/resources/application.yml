@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          #使eureka能通过服务发现定位到这个服务
+          enabled: true
+          #对于gateway自动创建的路由规则，默认只能用大写的服务名称去调用。
+          #这是因为，eureka注册中心默认的服务名是大写的，在调用的时候也要是大写的。用小写的名称调用服务会404
+          #这个属性可以让用户通过小写的服务名称调用服务，不过用大写的名称去调用，会404
+          lower-case-service-id: true
+      routes:
+      - id: feignclient
+        #如果匹配上了断言，转发到FEIGN-CLIENT
+        uri: lb://FEIGN-CLIENT
+        #断言(谓词)
+        predicates:
+        #所有匹配到/yml的都转发到这里
+        - Path=/yml/**
+        filters:
+        #意为匹配port后的第一个单词，
+        #也就是localhost:65000/yml/sayHi，路由后为localhost:65000/FEIGN-CLIENT/sayHi
+        - StripPrefix=1
+
+server:
+  port: 65000
+
+
+eureka:
+  client:
+    serviceUrl:
+      #注册中心地址
+      defaultZone: http://localhost:20000/eureka/
+
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        #开放出服务端点
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
