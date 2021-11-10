@@ -1,5 +1,6 @@
 package com.imooc.springcloud;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,9 @@ import java.time.ZonedDateTime;
 
 @Configuration
 public class GatewayConfiguration {
+
+    @Autowired
+    private TimerFilter timerFilter;
 
     @Bean
     @Order
@@ -27,6 +31,8 @@ public class GatewayConfiguration {
                                 .filters(f -> f.stripPrefix(1)
                                         //给响应中添加header
                                         .addResponseHeader("java-param", "gateway-config")
+                                        //指定自定义的filter
+//                                        .filter(timerFilter)
                                 )
                                 .uri("lb://FEIGN-CLIENT")
                 )
@@ -39,4 +45,6 @@ public class GatewayConfiguration {
                 )
                 .build();
     }
+
+
 }
