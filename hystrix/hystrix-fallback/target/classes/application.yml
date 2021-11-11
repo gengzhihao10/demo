@@ -61,22 +61,22 @@ hystrix:
         rollingStats:
           #每20秒进行一次请求数量的统计
           timeInMilliseconds: 20000
-#    cacheKey:
-#      fallback:
-#        #是否开启服务降级
-#        enabled: true
-#      execution:
-#        timeout:
-#          #超时
-#          enabled: true
-#        isolation:
-#          thread:
-#            #超时时间
-#            timeoutInMilliseconds: 3000
-#            #超时以后终止线程
-#            interruptOnTimeout: true
-#            #取消的时候终止线程
-#            interruptOnFutureCancel: true
+    cacheKey:
+      fallback:
+        #是否开启服务降级
+        enabled: true
+      execution:
+        timeout:
+          #超时
+          enabled: true
+        isolation:
+          thread:
+            #超时时间
+            timeoutInMilliseconds: 3000
+            #超时以后终止线程
+            interruptOnTimeout: true
+            #取消的时候终止线程
+            interruptOnFutureCancel: true
 
 
 feign-client:
