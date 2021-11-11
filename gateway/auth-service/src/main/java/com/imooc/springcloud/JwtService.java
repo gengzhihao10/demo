@@ -1,8 +1,8 @@
 package com.imooc.springcloud;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.JWTVerifier;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +36,7 @@ public class JwtService {
                 .withIssuer(ISSUER)
                 .withIssuedAt(now)
                 .withExpiresAt(new Date(now.getTime() + TOKEN_EXP_TIME))
+                .withClaim(USER_NAME, account.getUserName())
                 .sign(algorithm);
 
         log.info("jwt generated user = {}", account.getUserName());
@@ -49,18 +50,18 @@ public class JwtService {
      * @return
      */
     public boolean verify(String token, String userName){
-        log.info("verifying jwt - username={}", userName);
+        log.info("verifying jwt - username = {}", userName);
 
         try {
             Algorithm algorithm = Algorithm.HMAC256(KEY);
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer(ISSUER)
-                    .withClaim(USER_NAME, userName)
+                    .withClaim(USER_NAME,userName)
                     .build();
 
             verifier.verify(token);
             return true;
-        } catch (Exception e) {
+        }catch (Exception e){
             log.error("auth failed", e);
             return false;
         }
