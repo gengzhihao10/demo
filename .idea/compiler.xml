@@ -15,6 +15,7 @@
         <module name="eureka-server-peer2" />
         <module name="ribbon-consumer" />
         <module name="eureka-client" />
+        <module name="sleuth-traceA" />
         <module name="feign-consumer-advanced" />
         <module name="feign-client" />
         <module name="feign-consumer" />
@@ -22,6 +23,7 @@
         <module name="config-server-eureka" />
         <module name="gateway-sample" />
         <module name="eureka-server" />
+        <module name="sleuth-traceB" />
         <module name="config-bus-server" />
         <module name="hystrix-dashboard" />
         <module name="feign-client-intf" />

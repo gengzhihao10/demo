@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <properties>
+        <!--指定Java版本-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <groupId>org.example</groupId>
     <artifactId>spring-cloud-demo</artifactId>
     <packaging>pom</packaging>
@@ -32,6 +38,8 @@
         <module>gateway/gateway-sample</module>
         <module>gateway/auth-service-api</module>
         <module>gateway/auth-service</module>
+        <module>sleuth/sleuth-traceA</module>
+        <module>sleuth/sleuth-traceB</module>
     </modules>
 
     <!--dependencyManagement中的依赖，子项目中不显式声明，是无法继承的。只有显示声明依赖并且没有指定版本号的情况下，才会继承父项目中dependencyManagement的依赖-->

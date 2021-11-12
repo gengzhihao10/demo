@@ -16,6 +16,9 @@ public class GatewayConfiguration {
     @Autowired
     private TimerFilter timerFilter;
 
+    @Autowired
+    private AuthFilter authFilter;
+
     @Bean
     @Order
     public RouteLocator customizedRoutes(RouteLocatorBuilder builder) {
@@ -32,7 +35,8 @@ public class GatewayConfiguration {
                                         //给响应中添加header
                                         .addResponseHeader("java-param", "gateway-config")
                                         //指定自定义的filter
-//                                        .filter(timerFilter)
+                                        .filter(timerFilter)
+                                        .filter(authFilter)
                                 )
                                 .uri("lb://FEIGN-CLIENT")
                 )
