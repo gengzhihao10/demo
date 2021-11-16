@@ -21,6 +21,7 @@
         <module name="feign-consumer" />
         <module name="config-bus-client" />
         <module name="config-server-eureka" />
+        <module name="zipkin-server" />
         <module name="gateway-sample" />
         <module name="eureka-server" />
         <module name="sleuth-traceB" />

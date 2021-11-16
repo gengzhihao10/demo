@@ -40,6 +40,7 @@
         <module>gateway/auth-service</module>
         <module>sleuth/sleuth-traceA</module>
         <module>sleuth/sleuth-traceB</module>
+        <module>sleuth/zipkin-server</module>
     </modules>
 
     <!--dependencyManagement中的依赖，子项目中不显式声明，是无法继承的。只有显示声明依赖并且没有指定版本号的情况下，才会继承父项目中dependencyManagement的依赖-->
