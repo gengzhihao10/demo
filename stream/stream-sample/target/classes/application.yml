@@ -1,0 +1,25 @@
+
+
+spring:
+  application:
+    name: stream-sample
+
+server:
+  port: 50000
+  #RabbitMQ连接字符串
+  rabbitmq:
+    host: localhost
+    password: guest
+    port: 5672
+    username: guest
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  security:
+    enabled: false

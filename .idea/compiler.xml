@@ -13,6 +13,7 @@
         <module name="config-server" />
         <module name="config-client" />
         <module name="eureka-server-peer2" />
+        <module name="stream-sample" />
         <module name="ribbon-consumer" />
         <module name="eureka-client" />
         <module name="sleuth-traceA" />
