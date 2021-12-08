@@ -1,25 +1,54 @@
-
-
-spring:
-  application:
-    name: stream-sample
-
-server:
-  port: 50000
-  #RabbitMQ连接字符串
-  rabbitmq:
-    host: localhost
-    password: guest
-    port: 5672
-    username: guest
-
-management:
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  security:
-    enabled: false
+#
+#
+#spring:
+#  application:
+#    name: stream-sample
+#  cloud:
+#    stream:
+#      bindings:
+#        #绑定channel到broadcast
+#        myTopic-consumer:
+#          destination: broadcast
+#        myTopic-producer:
+#          destination: broadcast
+#        #消息分组
+#        group-consumer:
+#          destination: group-topic
+#          group: Group-B
+#          #消费分区配置
+#          consumer:
+#            partitioned: true
+#        group-producer:
+#          destination: group-topic
+#          producer:
+#            #2个消费分区
+#            partition-count: 2
+#            #SpEL(Key Resolver)
+#            #只有索引参数为1的节点(消费者)，才能消费消息
+#            partition-key-expression: 1
+#      #当前消费者实例总数
+#      instance-count: 2
+#      #最大值instanceCount - 1，当前实例的索引号
+#      instance-index: 0
+#
+#
+#
+#server:
+#  port: 50002
+#  #RabbitMQ连接字符串
+#  rabbitmq:
+#    host: localhost
+#    password: guest
+#    port: 5672
+#    username: guest
+#
+#management:
+#  endpoint:
+#    health:
+#      show-details: always
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  security:
+#    enabled: false
