@@ -1,5 +1,6 @@
 package com.imooc.springcloud.biz;
 
+import com.imooc.springcloud.topics.DelayedTopic;
 import com.imooc.springcloud.topics.GroupTopic;
 import com.imooc.springcloud.topics.MyTopic;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,9 @@ public class Controller {
     @Autowired
     private GroupTopic groupTopicProducer;
 
+    @Autowired
+    private DelayedTopic delayedTopicProducer;
+
     @PostMapping("send")
     public void sendMessage(@RequestParam String body){
         producer.output().send(MessageBuilder.withPayload(body).build());
@@ -27,5 +31,17 @@ public class Controller {
     @PostMapping("sendToGroup")
     public void sendMessageToGroup(@RequestParam String body){
         groupTopicProducer.output().send(MessageBuilder.withPayload(body).build());
+    }
+
+    @PostMapping("sendDM")
+    public void sendDelayedMessage(@RequestParam() String body, Integer seconds){
+        MessageBean msg = new MessageBean();
+        msg.setPayLoad(body);
+        log.info("redy to send delayed message");
+
+        delayedTopicProducer.output().send(MessageBuilder
+                .withPayload(msg)
+                .setHeader("x-delay",1000 * seconds)
+                .build());
     }
 }
