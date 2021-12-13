@@ -15,7 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
         GroupTopic.class,
         DelayedTopic.class,
         ErrorTopic.class,
-        RequeueTopic.class
+        RequeueTopic.class,
+        DLQTopic.class
 }
 )
 public class StreamConsumer {
@@ -68,5 +69,18 @@ public class StreamConsumer {
         }
         throw new RuntimeException("I'm not OK");
 
+    }
+
+    //死信队列
+    @StreamListener(DLQTopic.INPUT)
+    public void consumeDLQMessage(Object payLoad){
+        log.info("  DLQ - r u ok");
+        if (count.incrementAndGet() % 3 == 0){
+            log.info("DLQ - fine, 3ku,and u?");
+        } else {
+            log.info("DLQ - What's your problem");
+            throw new RuntimeException("DLQ - I'm not OK");
+        }
+        log.info("DLQ - Error message consumed successfully, payLoad={}", payLoad);
     }
 }

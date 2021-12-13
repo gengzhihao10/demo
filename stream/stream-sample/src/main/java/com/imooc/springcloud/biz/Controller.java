@@ -27,6 +27,9 @@ public class Controller {
     @Autowired
     private RequeueTopic requeueTopicProducer;
 
+    @Autowired
+    private DLQTopic dlqTopicProducer;
+
     @PostMapping("send")
     public void sendMessage(@RequestParam String body){
         producer.output().send(MessageBuilder.withPayload(body).build());
@@ -59,5 +62,11 @@ public class Controller {
     @PostMapping("sendErrorToMQ")
     public void sendErrorMessageToMQ(@RequestParam String body){
         requeueTopicProducer.output().send(MessageBuilder.withPayload(body).build());
+    }
+
+    //死信队列
+    @PostMapping("sendMessageToDLQ")
+    public void sendMessageToDLQ(@RequestParam String body){
+        dlqTopicProducer.output().send(MessageBuilder.withPayload(body).build());
     }
 }
