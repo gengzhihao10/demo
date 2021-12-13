@@ -1,9 +1,6 @@
 package com.imooc.springcloud.biz;
 
-import com.imooc.springcloud.topics.DelayedTopic;
-import com.imooc.springcloud.topics.ErrorTopic;
-import com.imooc.springcloud.topics.GroupTopic;
-import com.imooc.springcloud.topics.MyTopic;
+import com.imooc.springcloud.topics.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.support.MessageBuilder;
@@ -26,6 +23,9 @@ public class Controller {
 
     @Autowired
     private ErrorTopic errorTopicProducer;
+
+    @Autowired
+    private RequeueTopic requeueTopicProducer;
 
     @PostMapping("send")
     public void sendMessage(@RequestParam String body){
@@ -53,5 +53,11 @@ public class Controller {
     @PostMapping("sendError")
     public void sendErrorMessage(@RequestParam String body){
         errorTopicProducer.output().send(MessageBuilder.withPayload(body).build());
+    }
+
+    //异常重试(联机版)
+    @PostMapping("sendErrorToMQ")
+    public void sendErrorMessageToMQ(@RequestParam String body){
+        requeueTopicProducer.output().send(MessageBuilder.withPayload(body).build());
     }
 }
