@@ -30,6 +30,9 @@ public class Controller {
     @Autowired
     private DLQTopic dlqTopicProducer;
 
+    @Autowired
+    private FallBackTopic fallBackTopicProducer;
+
     @PostMapping("send")
     public void sendMessage(@RequestParam String body){
         producer.output().send(MessageBuilder.withPayload(body).build());
@@ -68,5 +71,14 @@ public class Controller {
     @PostMapping("sendMessageToDLQ")
     public void sendMessageToDLQ(@RequestParam String body){
         dlqTopicProducer.output().send(MessageBuilder.withPayload(body).build());
+    }
+
+    //fallback+升版
+    @PostMapping("fallback")
+    public void sendMessageToFallback(@RequestParam String body, @RequestParam(defaultValue = "1.0") String version){
+        fallBackTopicProducer.output().send(MessageBuilder
+                .withPayload(body)
+                .setHeader("version",version)
+                .build());
     }
 }
