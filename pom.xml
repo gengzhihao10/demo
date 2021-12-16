@@ -42,6 +42,8 @@
         <module>sleuth/sleuth-traceB</module>
         <module>sleuth/zipkin-server</module>
         <module>stream/stream-sample</module>
+        <module>dubbo/dubbo-api</module>
+        <module>dubbo/dubbo-client</module>
     </modules>
 
     <!--dependencyManagement中的依赖，子项目中不显式声明，是无法继承的。只有显示声明依赖并且没有指定版本号的情况下，才会继承父项目中dependencyManagement的依赖-->
