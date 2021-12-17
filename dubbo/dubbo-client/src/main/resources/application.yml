@@ -21,4 +21,4 @@ dubbo:
     protocol: register
 
 server:
-  port: 63001
+  port: 53001
